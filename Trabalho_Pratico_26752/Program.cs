@@ -18,5 +18,10 @@ namespace Trabalho_Pratico_26752
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
         }
+
+        static void Main(string[] args)
+        {
+
+        }
     }
 }
