@@ -1,5 +1,10 @@
-﻿using System;
-using HelpdeskSystem.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Trabalho_Pratico_26752.Classes;
+
 
 namespace HelpdeskSystem
 {
@@ -18,7 +23,7 @@ namespace HelpdeskSystem
             Assistance assistance = new Assistance
             {
                 AssistanceID = 1,
-                RequestDate = DateTime.Now,
+                RequestDate = DateTime.Parse("2024-12-13T19:13:00Z"),
                 Type = AssistanceType.TechnicalSupport,
                 Status = AssistanceStatus.Open,
                 Customer = customer,
@@ -42,4 +47,3 @@ namespace HelpdeskSystem
         }
     }
 }
-
