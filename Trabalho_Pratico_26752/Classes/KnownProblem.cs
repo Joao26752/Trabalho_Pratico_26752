@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using Trabalho_Pratico_26752.Classes;
+using Trabalho_Pratico_26752;
 
-namespace HelpdeskSystem.Models
+namespace Trabalho_Pratico_26752.Classes
 {
     public class KnownProblem
     {

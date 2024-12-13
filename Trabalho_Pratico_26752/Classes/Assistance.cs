@@ -1,7 +1,8 @@
 ﻿using System;
 using Trabalho_Pratico_26752;
+using Trabalho_Pratico_26752.Classes;
 
-namespace HelpdeskSystem.Models
+namespace Trabalho_Pratico_26752
 {
     public class Assistance
     {

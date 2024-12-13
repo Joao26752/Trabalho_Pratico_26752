@@ -1,4 +1,9 @@
-﻿namespace HelpdeskSystem.Models
+﻿using Trabalho_Pratico_26752.Classes;
+using Trabalho_Pratico_26752;
+using System;
+
+
+namespace Trabalho_Pratico_26752.Classes
 {
     public class Product
     {
