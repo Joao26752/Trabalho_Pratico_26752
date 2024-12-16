@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Trabalho_Pratico_26752.Classes;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Trabalho_Pratico_26752.Classes
 {
-    /// Representa uma solicitação de assistência.
+    // Representa uma solicitação de assistência.
     // The Assistance class represents a request for assistance.
     // It includes properties for the request date, type, status, description, customer, and operator.
     // The constructor initializes the assistance with an ID, customer, type, and description.
@@ -22,6 +23,9 @@ namespace Trabalho_Pratico_26752.Classes
         public string Description { get; private set; }
         public Customer Customer { get; private set; }
         public Operator Operator { get; private set; }
+        public int Rating { get; internal set; }
+        public AssistanceRequestStatus AssistanceStatus { get; internal set; }
+        public bool ProblemResolved { get; internal set; }
         #endregion
 
         #region Constructor
@@ -64,6 +68,12 @@ namespace Trabalho_Pratico_26752.Classes
                 Console.WriteLine($"Error closing assistance: {ex.Message}");
             }
         }
+
+        // Sets the status of the assistance.
+        public void SetStatus(AssistanceRequestStatus status)
+        {
+            Status = status;
+        }
         #endregion
 
         #region IAssistanceManager
@@ -71,6 +81,25 @@ namespace Trabalho_Pratico_26752.Classes
         {
             // Implement assistance management logic here
         }
+
+        internal void LinkKnownProblem(KnownProblem knownProblem)
+        {
+            Console.WriteLine($"Problema conhecido '{knownProblem.Description}' vinculado à assistência.");
+            ProblemResolved = true;
+            AssistanceStatus = AssistanceRequestStatus.Closed;
+        }
+
+        public void DisplayDetails()
+        {
+            Console.WriteLine($"Assistência ID: {ID}");
+            Console.WriteLine($"Cliente: {Customer.Name}");
+            Console.WriteLine($"Operador: {Operator?.Name ?? "Não atribuído"}");
+            Console.WriteLine($"Descrição: {Description}");
+            Console.WriteLine($"Status: {Status}");
+            Console.WriteLine($"Resolvido: {ProblemResolved}");
+            Console.WriteLine($"Avaliação: {Rating}");
+        }
+
         #endregion
     }
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Trabalho_Pratico_26752.Classes;
 using Trabalho_Pratico_26752;
+using System;
 
 namespace Trabalho_Pratico_26752.Classes
 {
@@ -15,5 +16,21 @@ namespace Trabalho_Pratico_26752.Classes
         {
             return AffectedProducts.Contains(product);
         }
+
+        public void AddProduct(Product product)
+        {
+            AffectedProducts.Add(product);
+        }
+        public void RemoveProduct(Product product) {  
+            AffectedProducts.Remove(product);    
+        }
+        public void DisplayInfo()
+        {
+            Console.WriteLine($"ID: {ProblemID}");
+            Console.WriteLine($"Descrição: {Description}");
+            Console.WriteLine($"Solução: {Solution}");
+            Console.WriteLine($"Produtos afetados: {string.Join(", ", AffectedProducts)}");
+        }
+
     }
 }

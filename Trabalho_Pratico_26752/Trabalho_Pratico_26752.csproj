@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Trabalho_Pratico_26752.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -46,6 +49,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssistanceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AssistanceForm.Designer.cs">
+      <DependentUpon>AssistanceForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\AssistancePersistance.cs" />
     <Compile Include="Classes\AssistanceStatus.cs" />
     <Compile Include="Classes\AssistanceType.cs" />
     <Compile Include="Classes\Assistance_v2.cs" />
@@ -54,15 +64,52 @@
     <Compile Include="Classes\Person.cs" />
     <Compile Include="Classes\Entity.cs" />
     <Compile Include="Classes\KnownProblem.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="Classes\Product.cs" />
+    <Compile Include="Classes\Prompt.cs" />
+    <Compile Include="CustomerForms.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="CustomerForms.Designer.cs">
+      <DependentUpon>CustomerForms.cs</DependentUpon>
     </Compile>
-    <Compile Include="Classes\Product.cs" />
+    <Compile Include="EvaluationForms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EvaluationForms.Designer.cs">
+      <DependentUpon>EvaluationForms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KnownProblemsForms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KnownProblemsForms.Designer.cs">
+      <DependentUpon>KnownProblemsForms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="mainform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="mainform.Designer.cs">
+      <DependentUpon>mainform.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OperatorForms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OperatorForms.Designer.cs">
+      <DependentUpon>OperatorForms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProductForms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProductForms.Designer.cs">
+      <DependentUpon>ProductForms.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportsForms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportsForms.Designer.cs">
+      <DependentUpon>ReportsForms.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

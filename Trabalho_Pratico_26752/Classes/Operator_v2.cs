@@ -56,6 +56,20 @@ namespace Trabalho_Pratico_26752.Classes
         {
             Console.WriteLine($"Operador: {Name} (ID: {ID}) - {Email} | Turno: {Shift}");
         }
+
+        internal void ResolveAssistance(Assistance assistance, bool resolved, int rating)
+        {
+            try
+            {
+                assistance.SetStatus(resolved ? AssistanceRequestStatus.Closed : AssistanceRequestStatus.InProgress);
+                assistance.Rating = rating;
+                Console.WriteLine($"Assistance {assistance.Description} resolved with status: {assistance.Status} and rating: {rating}.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error resolving assistance: {ex.Message}");
+            }
+        }
         #endregion
     }
 }
