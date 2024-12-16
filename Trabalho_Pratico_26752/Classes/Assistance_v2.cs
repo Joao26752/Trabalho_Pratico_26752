@@ -18,7 +18,7 @@ namespace Trabalho_Pratico_26752.Classes
         #region Properties
         public DateTime RequestDate { get; private set; }
         public AssistanceType Type { get; private set; }
-        public AssistanceStatus Status { get; private set; }
+        public AssistanceRequestStatus Status { get; private set; }
         public string Description { get; private set; }
         public Customer Customer { get; private set; }
         public Operator Operator { get; private set; }
@@ -31,7 +31,7 @@ namespace Trabalho_Pratico_26752.Classes
             Type = type;
             Description = description;
             RequestDate = DateTime.Parse("2024-12-13T19:15:37Z");
-            Status = AssistanceStatus.Open;
+            Status = AssistanceRequestStatus.Open;
         }
         #endregion
 
@@ -42,7 +42,7 @@ namespace Trabalho_Pratico_26752.Classes
             try
             {
                 Operator = op;
-                Status = AssistanceStatus.InProgress;
+                Status = AssistanceRequestStatus.InProgress;
                 Console.WriteLine($"Assistance {this.Description} assigned to operator {op.Name}.");
             }
             catch (Exception ex)
@@ -56,7 +56,7 @@ namespace Trabalho_Pratico_26752.Classes
         {
             try
             {
-                Status = AssistanceStatus.Closed;
+                Status = AssistanceRequestStatus.Closed;
                 Console.WriteLine($"Assistance {this.Description} closed with status: {Status}.");
             }
             catch (Exception ex)
