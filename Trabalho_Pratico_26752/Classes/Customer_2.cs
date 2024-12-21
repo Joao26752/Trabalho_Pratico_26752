@@ -7,46 +7,58 @@ using Trabalho_Pratico_26752;
 
 namespace Trabalho_Pratico_26752.Classes
 {
-    /// Representa um cliente no sistema.
-    // The Customer class represents a client in the system.
-    // It contains a list of Assistance objects associated with the customer.
-    // The constructor initializes the customer with an ID, name, and email.
-    // The RequestAssistance method adds an assistance request to the customer's list.
-    // The GetAssistances method returns all assistances associated with the customer.
-    // The DisplayInfo method outputs the customer's information to the console.
+    /// <summary>
+    /// Representa um cliente no sistema de helpdesk.
+    /// </summary>
     public class Customer : Person
     {
         #region Fields
 
-        /// Lista de assistências associadas ao cliente.
-
+        /// Lista de pedidos de assistência associados ao cliente.
         private readonly List<Assistance> _assistances = new List<Assistance>();
+        #endregion
+
+        #region Properties
+        /// Lista de pedidos de assistência associados ao cliente.
+        public IReadOnlyList<Assistance> Assistances => _assistances.AsReadOnly();
         #endregion
 
         #region Constructor
         /// Inicializa um novo cliente.
-
         public Customer(int id, string name, string email) : base(id, name, email) { }
         #endregion
 
         #region Methods
-
-        /// Solicita uma nova assistência para o cliente.
-        public void RequestAssistance(Assistance assistance)
+        /// <summary>
+        /// Adiciona um novo pedido de assistência para o cliente.
+        /// </summary>
+        /// <param name="assistance">A assistência a adicionar.</param>
+        public void AddAssistance(Assistance assistance)
         {
-            _assistances.Add(assistance);
+            if (assistance == null)
+                throw new ArgumentNullException(nameof(assistance));
+
+            _assistances.Add(assistance); // Adiciona a assistência à lista
         }
 
-  
-        /// Retorna todas as assistências do cliente.
-  
-        public IEnumerable<Assistance> GetAssistances() => _assistances.AsReadOnly();
+        /// <summary>
+        /// Remove um pedido de assistência do cliente.
+        /// </summary>
+        /// <param name="assistance">A assistência a remover.</param>
+        public void RemoveAssistance(Assistance assistance)
+        {
+            if (assistance == null)
+                throw new ArgumentNullException(nameof(assistance));
 
-        /// Exibe as informações do cliente.
-  
+            _assistances.Remove(assistance); // Remove a assistência da lista
+        }
+
+        /// <summary>
+        /// Apresenta as informações do cliente.
+        /// </summary>
         public override void DisplayInfo()
         {
-            Console.WriteLine($"Cliente: {Name} (ID: {ID}) - {Email}");
+            Console.WriteLine($"Cliente: {Name}, Email: {Email}");
         }
         #endregion
     }

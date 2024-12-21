@@ -29,6 +29,10 @@ namespace Trabalho_Pratico_26752.Classes
         private readonly List<Assistance> _assignedAssistances = new List<Assistance>();
         #endregion
 
+        #region Properties
+        public IReadOnlyList<Assistance> AssignedAssistances => _assignedAssistances.AsReadOnly();
+        #endregion
+
         #region Constructor
         /// Inicializa um novo operador.
 
@@ -39,24 +43,50 @@ namespace Trabalho_Pratico_26752.Classes
         #endregion
 
         #region Methods
-        /// Atribui uma assistência ao operador.
+        /// <summary>
+        /// Assigns an assistance to the operator.
+        /// </summary>
+        /// <param name="assistance">The assistance to assign.</param>
         public void AssignAssistance(Assistance assistance)
         {
+            if (assistance == null)
+                throw new ArgumentNullException(nameof(assistance));
+
             assistance.AssignToOperator(this);
             _assignedAssistances.Add(assistance);
         }
 
-  
-        /// Retorna todas as assistências atribuídas ao operador.
-
-        public IEnumerable<Assistance> GetAssignedAssistances() => _assignedAssistances.AsReadOnly();
-
-        /// Exibe as informações do operador.
-        public override void DisplayInfo()
+        /// <summary>
+        /// Unassigns an assistance from the operator.
+        /// </summary>
+        /// <param name="assistance">The assistance to unassign.</param>
+        public void UnassignAssistance(Assistance assistance)
         {
-            Console.WriteLine($"Operador: {Name} (ID: {ID}) - {Email} | Turno: {Shift}");
+            if (assistance == null)
+                throw new ArgumentNullException(nameof(assistance));
+
+            _assignedAssistances.Remove(assistance);
         }
 
+        /// <summary>
+        /// Returns all assistances assigned to the operator.
+        /// </summary>
+        public IEnumerable<Assistance> GetAssignedAssistances() => _assignedAssistances.AsReadOnly();
+
+        /// <summary>
+        /// Displays the operator's information.
+        /// </summary>
+        public override void DisplayInfo()
+        {
+            Console.WriteLine($"Operator: {Name}, Email: {Email}, Shift: {Shift}");
+        }
+
+        /// <summary>
+        /// Resolves an assistance and updates its status and rating.
+        /// </summary>
+        /// <param name="assistance">The assistance to resolve.</param>
+        /// <param name="resolved">Whether the assistance is resolved.</param>
+        /// <param name="rating">The rating of the assistance.</param>
         internal void ResolveAssistance(Assistance assistance, bool resolved, int rating)
         {
             try

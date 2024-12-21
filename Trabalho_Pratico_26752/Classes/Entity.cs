@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +14,13 @@ namespace Trabalho_Pratico_26752.Classes
         #region Properties
 
         /// Identificador único da entidade.
-        public int ID { get; private set; }
+        private int _id;
+
+        public int Id
+        {
+            get => _id;
+            protected set => _id = value;
+        }
         #endregion
 
         #region Constructor
@@ -22,7 +28,7 @@ namespace Trabalho_Pratico_26752.Classes
         /// Inicializa uma nova instância de Entity.
         protected Entity(int id)
         {
-            ID = id;
+            _id = id;
         }
         #endregion
     }

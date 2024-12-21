@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
@@ -15,6 +15,7 @@ namespace Trabalho_Pratico_26752
             _users = LoadUsersFromFile();
         }
 
+        // Método para carregar os utilizadores de um ficheiro
         private List<User> LoadUsersFromFile()
         {
             var users = new List<User>();
@@ -42,24 +43,22 @@ namespace Trabalho_Pratico_26752
             return users;
         }
 
+        // Evento de clique para efetuar o login
         private void btnLogin_Click(object sender, EventArgs e)
         {
             string username = txtUsername.Text;
             string password = txtPassword.Text;
 
-            var user = _users.Find(u => u.Username == username && u.Password == password);
-
+            // Verifica se o utilizador existe e a palavra-passe está correta
+            var user = _users.FirstOrDefault(u => u.Username == username && u.Password == password);
             if (user != null)
             {
-                MessageBox.Show($"Bem-vindo, {user.Username}! Perfil: {user.Role}", "Login Bem-sucedido", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                var mainForm = new mainform(user.Role);
-                this.Hide();
-                mainForm.Show();
+                MessageBox.Show("Login bem-sucedido!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // Proceder para o próximo formulário ou funcionalidade
             }
             else
             {
-                MessageBox.Show("Utilizador ou palavra-passe incorretos!", "Erro de Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Nome de utilizador ou palavra-passe inválidos.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
