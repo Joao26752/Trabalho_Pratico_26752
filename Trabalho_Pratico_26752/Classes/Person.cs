@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,20 +16,8 @@ namespace Trabalho_Pratico_26752.Classes
         #region Properties
 
        
-        private string _name;
-        private string _email;
-
-        public string Name
-        {
-            get => _name;
-            set => _name = value;
-        }
-
-        public string Email
-        {
-            get => _email;
-            set => _email = value;
-        }
+        public string Name { get; set; }     
+        public string Email { get; set; }   
         #endregion
 
         #region Constructor

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -19,7 +19,6 @@ namespace Trabalho_Pratico_26752
             _knownProblems = knownProblems ?? new List<KnownProblem>();
         }
 
-        // Evento de clique para gerar um relatório
         private void btnGenerateReport_Click(object sender, EventArgs e)
         {
             try
@@ -33,36 +32,37 @@ namespace Trabalho_Pratico_26752
                     return;
                 }
 
-                // Caminho onde o relatório será guardado
+                // Caminho onde o relatório será salvo
                 string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Relatorio_Helpdesk.txt");
 
                 using (StreamWriter writer = new StreamWriter(filePath))
                 {
                     writer.WriteLine("=== Relatório do Sistema de Helpdesk ===");
                     writer.WriteLine($"Data: {DateTime.Now}");
+                    writer.WriteLine($"Tipo de Relatório: {reportType}\n");
 
-                    // Gera o relatório com base no tipo selecionado
                     if (reportType == "Assistências Resolvidas")
                     {
-                        writer.WriteLine("\n--- Assistências Resolvidas ---");
-                        foreach (var assistance in _assistances.Where(a => a.Status == "Concluído"))
+                        var resolved = _assistances.Where(a => a.Status == AssistanceRequestStatus.Closed).ToList();
+                        writer.WriteLine($"Total de Assistências Resolvidas: {resolved.Count}\n");
+                        foreach (var assistance in resolved)
                         {
-                            writer.WriteLine($"ID: {assistance.ID}, Descrição: {assistance.Description}, Técnico: {assistance.AssignedTechnician?.Name}");
+                            writer.WriteLine($"ID: {assistance.ID}, Descrição: {assistance.Description}, Avaliação: {assistance.Rating}");
                         }
                     }
                     else if (reportType == "Problemas Conhecidos")
                     {
-                        writer.WriteLine("\n--- Problemas Conhecidos ---");
+                        writer.WriteLine($"Total de Problemas Conhecidos: {_knownProblems.Count}\n");
                         foreach (var problem in _knownProblems)
                         {
-                            writer.WriteLine($"ID: {problem.ID}, Descrição: {problem.Description}, Solução: {problem.Solution}");
+                            writer.WriteLine($"ID: {problem.ProblemID}, Descrição: {problem.Description}, Solução: {problem.Solution}");
                         }
                     }
 
                     writer.WriteLine("\n=== Fim do Relatório ===");
                 }
 
-                MessageBox.Show("Relatório gerado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Relatório gerado com sucesso!\nLocal: {filePath}", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
