@@ -5,9 +5,33 @@ namespace Trabalho_Pratico_26752
 {
     public partial class mainform : Form
     {
-        public mainform()
+        private string _userRole;
+
+        public mainform(string userRole)
         {
-            InitializeComponent(); // Inicializa os componentes do formulário
+            InitializeComponent();
+            _userRole = userRole;
+            ConfigurePermissions();
+        }
+
+        private void ConfigurePermissions()
+        {
+            if (_userRole == "Admin")
+            {
+                // Acesso total
+            }
+            else if (_userRole == "Technician")
+            {
+                btnManageCustomers.Enabled = false;
+                btnManageProducts.Enabled = false;
+            }
+            else if (_userRole == "Client")
+            {
+                btnManageOperators.Enabled = false;
+                btnManageProducts.Enabled = false;
+                btnManageCustomers.Enabled = false;
+                btnGenerateReports.Enabled = false;
+            }
         }
 
         private void btnManageCustomers_Click(object sender, EventArgs e)
@@ -41,4 +65,3 @@ namespace Trabalho_Pratico_26752
         }
     }
 }
-

@@ -10,7 +10,9 @@ namespace Trabalho_Pratico_26752
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new mainform());
+
+            var loginForm = new LoginForm();
+            Application.Run(loginForm); // Começa pela tela de login
         }
     }
 }

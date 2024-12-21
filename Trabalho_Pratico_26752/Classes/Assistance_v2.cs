@@ -1,20 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Trabalho_Pratico_26752.Classes;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Trabalho_Pratico_26752.Classes
 {
-    // Representa uma solicitação de assistência.
-    // The Assistance class represents a request for assistance.
-    // It includes properties for the request date, type, status, description, customer, and operator.
-    // The constructor initializes the assistance with an ID, customer, type, and description.
-    // The AssignToOperator method assigns the assistance to an operator and changes the status to InProgress.
-    // The CloseAssistance method closes the assistance and updates the status to Closed.
-    public class Assistance : Entity, IAssistanceManager
+    public class Assistance : Entity
     {
         #region Properties
         public DateTime RequestDate { get; private set; }
@@ -23,8 +12,8 @@ namespace Trabalho_Pratico_26752.Classes
         public string Description { get; private set; }
         public Customer Customer { get; private set; }
         public Operator Operator { get; private set; }
+        public Operator AssignedTechnician { get; private set; } // Técnico atribuído
         public int Rating { get; internal set; }
-        public AssistanceRequestStatus AssistanceStatus { get; internal set; }
         public bool ProblemResolved { get; internal set; }
         #endregion
 
@@ -34,76 +23,72 @@ namespace Trabalho_Pratico_26752.Classes
             Customer = customer;
             Type = type;
             Description = description;
-            RequestDate = DateTime.Parse("2024-12-13T19:15:37Z");
+            RequestDate = DateTime.Now;
             Status = AssistanceRequestStatus.Open;
         }
         #endregion
 
         #region Methods
-        // Assigns the assistance to an operator and changes the status to InProgress.
         public void AssignToOperator(Operator op)
         {
-            try
-            {
-                Operator = op;
-                Status = AssistanceRequestStatus.InProgress;
-                Console.WriteLine($"Assistance {this.Description} assigned to operator {op.Name}.");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error assigning assistance: {ex.Message}");
-            }
+            Operator = op;
+            Status = AssistanceRequestStatus.InProgress;
+            Console.WriteLine($"Assistance {Description} assigned to operator {op.Name}.");
         }
 
-        // Closes the assistance and updates the status to Closed.
+        public void AssignTechnician(Operator technician)
+        {
+            if (technician == null)
+                throw new ArgumentNullException(nameof(technician), "O técnico não pode ser nulo.");
+
+            AssignedTechnician = technician;
+            Status = AssistanceRequestStatus.InProgress;
+            Console.WriteLine($"Técnico {technician.Name} atribuído à assistência {Description}.");
+        }
+
+        public void CompleteTicket()
+        {
+            if (Status != AssistanceRequestStatus.InProgress)
+            {
+                throw new InvalidOperationException("O ticket só pode ser concluído se estiver em progresso.");
+            }
+
+            Status = AssistanceRequestStatus.Closed;
+            ProblemResolved = true;
+
+            Console.WriteLine($"Ticket ID {ID} concluído com sucesso.");
+        }
+
         public void CloseAssistance(bool resolved)
         {
-            try
-            {
-                Status = AssistanceRequestStatus.Closed;
-                Console.WriteLine($"Assistance {this.Description} closed with status: {Status}.");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error closing assistance: {ex.Message}");
-            }
+            Status = AssistanceRequestStatus.Closed;
+            ProblemResolved = resolved;
+            Console.WriteLine($"Assistance {Description} closed with status: {Status}.");
         }
 
-        // Sets the status of the assistance.
         public void SetStatus(AssistanceRequestStatus status)
         {
+            if (status == AssistanceRequestStatus.Closed && Status != AssistanceRequestStatus.InProgress)
+            {
+                throw new InvalidOperationException("Assistance can only be closed if it's in progress.");
+            }
             Status = status;
         }
-        #endregion
-
-        #region IAssistanceManager
-        public void ManageAssistance()
+        public void ResolveAssistance(bool resolved, int rating)
         {
-            // Implement assistance management logic here
+            Status = resolved ? AssistanceRequestStatus.Closed : AssistanceRequestStatus.InProgress;
+            ProblemResolved = resolved;
+            Rating = rating;
+            Console.WriteLine($"Assistance {Description} resolved with status: {Status} and rating: {Rating}.");
         }
-
-        internal void LinkKnownProblem(KnownProblem knownProblem)
-        {
-            Console.WriteLine($"Problema conhecido '{knownProblem.Description}' vinculado à assistência.");
-            ProblemResolved = true;
-            AssistanceStatus = AssistanceRequestStatus.Closed;
-        }
-
-        public void DisplayDetails()
-        {
-            Console.WriteLine($"Assistência ID: {ID}");
-            Console.WriteLine($"Cliente: {Customer.Name}");
-            Console.WriteLine($"Operador: {Operator?.Name ?? "Não atribuído"}");
-            Console.WriteLine($"Descrição: {Description}");
-            Console.WriteLine($"Status: {Status}");
-            Console.WriteLine($"Resolvido: {ProblemResolved}");
-            Console.WriteLine($"Avaliação: {Rating}");
+        public void RejectAssistance() {  
+            Status = AssistanceRequestStatus.Closed;
+            Console.WriteLine($"Assistance {Description} rejected.");
         }
 
         #endregion
     }
 
-    // The AssistanceType enum defines types of assistance requests.
     public enum AssistanceType
     {
         TechnicalSupport,
@@ -111,17 +96,11 @@ namespace Trabalho_Pratico_26752.Classes
         Installation
     }
 
-    // The AssistanceStatus enum defines the possible statuses of an assistance request.
     public enum AssistanceRequestStatus
     {
         Open,
         InProgress,
         Closed
     }
-
-    // Define the IAssistanceManager interface
-    public interface IAssistanceManager
-    {
-        void ManageAssistance();
-    }
 }
+

@@ -39,7 +39,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.dgvEvaluations);
             this.Controls.Add(this.btnUpdateEvaluation);
-            this.Text = "Avaliação de Assistências";
+            this.Text = "Menu de Avaliação";
 
             ((System.ComponentModel.ISupportInitialize)(this.dgvEvaluations)).EndInit();
             this.ResumeLayout(false);

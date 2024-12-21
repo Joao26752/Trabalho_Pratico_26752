@@ -84,6 +84,12 @@
     <Compile Include="KnownProblemsForms.Designer.cs">
       <DependentUpon>KnownProblemsForms.cs</DependentUpon>
     </Compile>
+    <Compile Include="LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="mainform.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,6 +115,24 @@
     </Compile>
     <Compile Include="ReportsForms.Designer.cs">
       <DependentUpon>ReportsForms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TechnicianForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TechnicianForm.Designer.cs">
+      <DependentUpon>TechnicianForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserManagementForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserManagementForm.Designer.cs">
+      <DependentUpon>UserManagementForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Usersforms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Usersforms.Designer.cs">
+      <DependentUpon>Usersforms.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

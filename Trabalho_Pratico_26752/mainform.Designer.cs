@@ -7,7 +7,7 @@
         private System.Windows.Forms.Button btnManageCustomers;
         private System.Windows.Forms.Button btnManageAssistances;
         private System.Windows.Forms.Button btnManageOperators;
-        private System.Windows.Forms.Button btnManageProducts; // Novo botão
+        private System.Windows.Forms.Button btnManageProducts;
         private System.Windows.Forms.Button btnGenerateReports;
 
         protected override void Dispose(bool disposing)
@@ -50,7 +50,7 @@
             this.btnManageOperators.Text = "Operadores";
             this.btnManageOperators.Click += new System.EventHandler(this.btnManageOperators_Click);
 
-            // btnManageProducts (Novo Botão)
+            // btnManageProducts
             this.btnManageProducts.Location = new System.Drawing.Point(50, 230);
             this.btnManageProducts.Name = "btnManageProducts";
             this.btnManageProducts.Size = new System.Drawing.Size(200, 40);

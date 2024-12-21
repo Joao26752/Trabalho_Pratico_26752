@@ -14,7 +14,7 @@ namespace Trabalho_Pratico_26752
         public CustomerForms()
         {
             InitializeComponent();
-            _customers = new List<Customer>(); // Inicializa a lista
+            _customers = new List<Customer>(); // Inicia a lista
             LoadCustomersFromFile();           // Carrega os dados do ficheiro
             InitializeDataGridView();
         }

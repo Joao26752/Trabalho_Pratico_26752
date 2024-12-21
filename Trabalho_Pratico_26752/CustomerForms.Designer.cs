@@ -74,7 +74,7 @@
             this.Controls.Add(this.btnAddCustomer);
             this.Controls.Add(this.dgvCustomers);
             this.Name = "CustomerForms";
-            this.Text = "Gerenciamento de Clientes";
+            this.Text = "Menu de Clientes";
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).EndInit();
             this.ResumeLayout(false);
         }
